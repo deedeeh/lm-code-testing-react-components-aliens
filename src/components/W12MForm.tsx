@@ -4,12 +4,14 @@ import SpeciesName from './SpeciesName';
 import PlanetName from './PlanetName';
 import NumberOfBeings from './NumberOfBeings';
 import WhatIs2Plus2 from './WhatIs2Plus2';
+import ReasonForSparing from './ReasonForSparing';
 
 const W12MForm = () => {
 	const [ speciesName, setSpeciesName ] = useState<string>('');
 	const [ planetName, setPlanetName ] = useState<string>('');
 	const [ numberOfBeings, setNumberOfBeings ] = useState<string>('');
 	const [ whatIs2Plus2, setWhaIs2Plus2 ] = useState<string>('Not 4');
+	const [ reasonForSparing, setReasonForSparing ] = useState<string>('');
 
 	return (
 		<section className='w12MForm'>
@@ -29,6 +31,10 @@ const W12MForm = () => {
 			<WhatIs2Plus2 
 				whatIs2Plus2={whatIs2Plus2}
 				onChangeWhatIs2Plus2={(e: ChangeEvent<HTMLSelectElement>) => setWhaIs2Plus2(e.target.value)}
+			/>
+			<ReasonForSparing 
+				reasonForSparing={reasonForSparing}
+				onChangeReasonForSparing={(e: ChangeEvent<HTMLTextAreaElement>) => setReasonForSparing(e.target.value)}
 			/>
 		</section>
 	);
