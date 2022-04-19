@@ -17,9 +17,10 @@ const W12MForm = () => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setFormSubmission(true);
+		setFormSubmission(true)
 	}
 
+	// When I call reset in handleSubmit the data aren't displayed. Bug related to async 
 	// const resetForm = () => {
 	// 	setSpeciesName('');
 	// 	setPlanetName('');
