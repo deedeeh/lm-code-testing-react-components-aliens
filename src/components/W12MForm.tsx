@@ -7,6 +7,14 @@ import WhatIs2Plus2 from './WhatIs2Plus2';
 import ReasonForSparing from './ReasonForSparing';
 import DisplayFormData from './DisplayFormData';
 
+export interface SubmittedData {
+	speciesName: string;
+	planetName: string;
+	numberOfBeings: string;
+	whatIs2Plus2: string;
+	reasonForSparing: string;
+}
+
 const W12MForm = () => {
 	const [ speciesName, setSpeciesName ] = useState<string>('');
 	const [ planetName, setPlanetName ] = useState<string>('');
@@ -14,20 +22,22 @@ const W12MForm = () => {
 	const [ whatIs2Plus2, setWhaIs2Plus2 ] = useState<string>('Not 4');
 	const [ reasonForSparing, setReasonForSparing ] = useState<string>('');
 	const [ formSubmission, setFormSubmission ] = useState<boolean>(false);
+	const [ submittedData, setSubmittedData ] = useState<SubmittedData>({speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing});
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setFormSubmission(true)
+		setSubmittedData({...submittedData, speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing});
+		setFormSubmission(true);
+		resetForm();
 	}
 
-	// When I call reset in handleSubmit the data aren't displayed. Bug related to async 
-	// const resetForm = () => {
-	// 	setSpeciesName('');
-	// 	setPlanetName('');
-	// 	setNumberOfBeings('');
-	// 	setWhaIs2Plus2('Not 4');
-	// 	setReasonForSparing('');
-	// }
+	const resetForm = () => {
+		setSpeciesName('');
+		setPlanetName('');
+		setNumberOfBeings('');
+		setWhaIs2Plus2('Not 4');
+		setReasonForSparing('');
+	}
 
 	return (
 		<>
@@ -60,11 +70,11 @@ const W12MForm = () => {
 			<section>
 				{formSubmission && (
 					<DisplayFormData 
-						speciesName={speciesName}
-						planetName={planetName}	
-						numberOfBeings={numberOfBeings}
-						whatIs2Plus2={whatIs2Plus2}
-						reasonForSparing={reasonForSparing}
+						speciesName={submittedData.speciesName}
+						planetName={submittedData.planetName}
+						numberOfBeings={submittedData.numberOfBeings}
+						whatIs2Plus2={submittedData.whatIs2Plus2}
+						reasonForSparing={submittedData.reasonForSparing}
 					/>
 				)}
 			</section>

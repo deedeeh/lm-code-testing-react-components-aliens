@@ -1,12 +1,6 @@
-interface FormDataProps {
-  speciesName: string;
-  planetName: string;
-  numberOfBeings: string;
-  whatIs2Plus2: string;
-  reasonForSparing: string;
-}
+import { SubmittedData } from './W12MForm'
 
-const DisplayFormData: React.FC<FormDataProps> = ({ speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing }) => 
+const DisplayFormData: React.FC<SubmittedData> = ({ speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing}) => 
   <div>
     <h2>Form Data</h2>
     <p>Species Name: {speciesName}</p>
