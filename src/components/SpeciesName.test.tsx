@@ -29,11 +29,12 @@ describe('<SpeciesName />', () => {
       onChangeSpeciesName: mockChange
     }
     render(<SpeciesName {...speciesNameData} />);
-    const speciesNameElement = screen.getByRole('textbox');
+    const speciesNameInput = screen.getByRole('textbox');
     const onChangeProp = speciesNameData.onChangeSpeciesName;
-    speciesNameElement.onChange = onChangeProp;
-    await userEvent.type(speciesNameElement, 'Humans');
+    speciesNameInput.onChange = onChangeProp;
+    await userEvent.type(speciesNameInput, 'Humans');
     expect(onChangeProp).toHaveBeenCalled();
+    //I need to check why this returns 11 calls not 6!
     // expect(onChangeProp).toHaveBeenCalledTimes(6);
   });
 

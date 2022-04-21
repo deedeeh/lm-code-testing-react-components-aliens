@@ -12,7 +12,7 @@ describe('<PlanetName />', () => {
     expect(planetNameLabelText).toBeInTheDocument();
   });
 
-  test('changes given initial prop when the user types a new value', () => {
+  test('displays the correct passed prop value', () => {
     const planetNameData = {
       planetName: 'Earth',
       onChangePlanetName: mockChange
