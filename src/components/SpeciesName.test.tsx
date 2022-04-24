@@ -7,7 +7,11 @@ const mockChange = jest.fn();
 describe('<SpeciesName />', () => {
   
   test('renders speciesName component', () => {
-    render(<SpeciesName />);
+    const speciesNameData = {
+      speciesName: 'Humans',
+      onChangeSpeciesName: mockChange,
+    }
+    render(<SpeciesName {...speciesNameData} />);
     const speciesNameLabelText = screen.getByLabelText(/^Species Name:$/i);
     expect(speciesNameLabelText).toBeInTheDocument();
   });
@@ -19,11 +23,11 @@ describe('<SpeciesName />', () => {
     }
     render(<SpeciesName {...speciesNameData} />);
     const speciesNameElement = screen.getByRole('textbox');
-    userEvent.type(speciesNameElement, speciesNameElement.value);
+    userEvent.type(speciesNameElement, speciesNameData.speciesName);
     expect(speciesNameElement).toHaveValue('Humans');
   });
 
-  test('calls onChange function with passed onChangeSpeciesName prop', async () => {
+  test('calls onChange function when user types', async () => {
     const speciesNameData = {
       speciesName: '',
       onChangeSpeciesName: mockChange
@@ -31,7 +35,7 @@ describe('<SpeciesName />', () => {
     render(<SpeciesName {...speciesNameData} />);
     const speciesNameInput = screen.getByRole('textbox');
     const onChangeProp = speciesNameData.onChangeSpeciesName;
-    speciesNameInput.onChange = onChangeProp;
+    speciesNameInput.onchange = onChangeProp;
     await userEvent.type(speciesNameInput, 'Humans');
     expect(onChangeProp).toHaveBeenCalled();
     //I need to check why this returns 11 calls not 6!

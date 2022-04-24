@@ -7,7 +7,11 @@ const mockChange = jest.fn();
 describe('<NumberOfBeings />', () => {
 
   test('renders NumberOfBeings component', () => {
-    const { getByLabelText } = render(<NumberOfBeings />);
+    const numberOfBeingsData = {
+      numberOfBeings: '100 Million',
+      onChangeNumberOfBeings: mockChange
+    }
+    const { getByLabelText } = render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsLabelText = getByLabelText(/^Number of beings:$/i);
     expect(numberOfBeingsLabelText).toBeInTheDocument();
   });
@@ -30,7 +34,7 @@ describe('<NumberOfBeings />', () => {
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsInput = screen.getByRole('textbox');
     const onChangeProp = numberOfBeingsData.onChangeNumberOfBeings;
-    numberOfBeingsInput.onChange = onChangeProp;
+    numberOfBeingsInput.onchange = onChangeProp;
     await userEvent.type(numberOfBeingsInput, '100 Million');
     expect(onChangeProp).toHaveBeenCalled();
     expect(onChangeProp).toHaveBeenCalledTimes(11);

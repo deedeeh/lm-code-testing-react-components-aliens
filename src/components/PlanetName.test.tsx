@@ -7,7 +7,11 @@ const mockChange = jest.fn();
 describe('<PlanetName />', () => {
 
   test('renders PlanetName component', () => {
-    const { getByLabelText } = render(<PlanetName />);
+    const planetNameData = {
+      planetName: 'Earth',
+      onChangePlanetName: mockChange
+    }
+    const { getByLabelText } = render(<PlanetName {...planetNameData} />);
     const planetNameLabelText = getByLabelText(/^Planet Name:$/i);
     expect(planetNameLabelText).toBeInTheDocument();
   });
@@ -30,7 +34,7 @@ describe('<PlanetName />', () => {
     render(<PlanetName {...planetNameData} />);
     const planetNameElement = screen.getByRole('textbox');
     const onChangeProp = planetNameData.onChangePlanetName;
-    planetNameElement.onChange = onChangeProp;
+    planetNameElement.onchange = onChangeProp;
     await userEvent.type(planetNameElement, 'Mars');
     expect(onChangeProp).toHaveBeenCalled();
     expect(onChangeProp).toHaveBeenCalledTimes(4);
