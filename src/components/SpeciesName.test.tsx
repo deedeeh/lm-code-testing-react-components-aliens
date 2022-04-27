@@ -54,6 +54,16 @@ describe('<SpeciesName />', () => {
     expect(speciesNameData.onChangeSpeciesName).toHaveBeenCalledTimes(1);
   });
 
+  test('checks for validation', () => {
+    const speciesNameData = {
+      speciesName: 'Humans',
+      onChangeSpeciesName: mockChange
+    }
+    render(<SpeciesName {...speciesNameData} />);
+    const speciesName = screen.queryByText('ERROR'); 
+    expect(speciesName).not.toBeInTheDocument;
+  });
+
 });
 
 
