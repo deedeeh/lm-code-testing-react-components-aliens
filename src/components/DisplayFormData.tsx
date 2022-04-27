@@ -1,4 +1,4 @@
-import { SubmittedData } from './W12MForm'
+import SubmittedData from './SubmittedData';
 
 const DisplayFormData: React.FC<SubmittedData> = ({ speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing}) => 
   <div>

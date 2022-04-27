@@ -1,12 +1,26 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import W12MForm from './W12MForm';
 
-test('renders form element', () => {
-	// we can hold onto the object returned from render()
-	// this object has a container property that we can destructure and inspect
-	const { container } = render(<W12MForm />);
+const mockSubmit = jest.fn();
 
-	// the container is just a normal DOM element, so we can look at normal properties like '.firstChild'
-	// for example, the firstChild of our container should be our form element
+const formProps = {
+	handleSubmit: mockSubmit,
+	onChangeSpeciesName: () => {},
+	onChangePlanetName: () => {},
+	onChangeNumberOfBeings: () => {},
+	onChangeWhatIs2Plus2: () => {},
+	onChangeReasonForSparing: () => {}
+}
+
+test('renders form element', () => {
+	const { container } = render(<W12MForm {...formProps} />);
 	expect(container.firstChild).toHaveClass('w12MForm');
 });
+
+test('calls onSubmit handler when user clicks on submit button', () => {
+	const { getByLabelText, getByTestId } = render(<W12MForm {...formProps} />);
+	fireEvent.change(getByLabelText(/^Planet Name:$/i), { target: { value: 'Earth' } });
+	fireEvent.submit(getByTestId('form'));
+	expect(mockSubmit).toHaveBeenCalled();
+	expect(mockSubmit).toHaveBeenCalledTimes(1);
+}); 
