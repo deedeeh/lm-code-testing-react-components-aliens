@@ -62,7 +62,7 @@ describe('<SpeciesName />', () => {
   //   render(<SpeciesName {...validSpeciesName} />);
   //   const speciesNameElement = screen.getByLabelText(/^Species Name:$/i);
   //   await userEvent.type(speciesNameElement, validSpeciesName.speciesName);
-  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./i)).not.toBeInTheDocument();
+  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./)).not.toBeInTheDocument();
   // });
 
   // test('returns an invalid input of characters less than 3', async () => {

@@ -34,8 +34,8 @@ const PlanetName: React.FC<PlanetNameProps> = ({ planetName, onChangePlanetName 
             setErrorMessage(errorMessage);
             onChangePlanetName(e)
           }} />
-          <ErrorMessage message={errorMessage} />
       </label>
+      <ErrorMessage message={errorMessage} />
     </div>
   )
 }
