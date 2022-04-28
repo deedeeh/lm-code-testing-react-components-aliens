@@ -8,7 +8,7 @@ function App() {
 	const [ speciesName, setSpeciesName ] = useState<string>('');
 	const [ planetName, setPlanetName ] = useState<string>('');
 	const [ numberOfBeings, setNumberOfBeings ] = useState<string>('');
-	const [ whatIs2Plus2, setWhaIs2Plus2 ] = useState<string>('Not 4');
+	const [ whatIs2Plus2, setWhaIs2Plus2 ] = useState<string>('Select');
 	const [ reasonForSparing, setReasonForSparing ] = useState<string>('');
 	const [ formSubmission, setFormSubmission ] = useState<boolean>(false);
 	const [ submittedData, setSubmittedData ] = useState<SubmittedData>({speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing});
@@ -24,7 +24,7 @@ function App() {
 		setSpeciesName('');
 		setPlanetName('');
 		setNumberOfBeings('');
-		setWhaIs2Plus2('Not 4');
+		setWhaIs2Plus2('Select');
 		setReasonForSparing('');
 	}
 
