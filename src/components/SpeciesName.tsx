@@ -25,6 +25,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpeciesN
         Species Name:
         &nbsp;
         <input 
+          required
           type='text' 
           id='speciesName' 
           value={speciesName} 
@@ -33,7 +34,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpeciesN
             setErrorMessage(errorMessage);
             onChangeSpeciesName(e)
           }} />
-        <ErrorMessage message={errorMessage} />
+          <ErrorMessage message={errorMessage} />
       </label>
     </div>
   )

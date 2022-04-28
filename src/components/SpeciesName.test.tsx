@@ -54,15 +54,27 @@ describe('<SpeciesName />', () => {
     expect(speciesNameData.onChangeSpeciesName).toHaveBeenCalledTimes(1);
   });
 
-  test('checks for validation', () => {
-    const speciesNameData = {
-      speciesName: 'Humans',
-      onChangeSpeciesName: mockChange
-    }
-    render(<SpeciesName {...speciesNameData} />);
-    const speciesName = screen.queryByText('ERROR'); 
-    expect(speciesName).not.toBeInTheDocument;
-  });
+  // test('returns a valid input', async () => {
+  //   const validSpeciesName = {
+  //     speciesName: 'Humans',
+  //     onChangeSpeciesName: mockChange
+  //   }
+  //   render(<SpeciesName {...validSpeciesName} />);
+  //   const speciesNameElement = screen.getByLabelText(/^Species Name:$/i);
+  //   await userEvent.type(speciesNameElement, validSpeciesName.speciesName);
+  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./i)).not.toBeInTheDocument();
+  // });
+
+  // test('returns an invalid input of characters less than 3', async () => {
+  //   const invalidSpeciesName = {
+  //     speciesName: 'ir',
+  //     onChangeSpeciesName: mockChange
+  //   }
+  //   render(<SpeciesName {...invalidSpeciesName} />);
+  //   const speciesNameElement = screen.getByLabelText(/^Species Name:$/i);
+  //   await userEvent.type(speciesNameElement, invalidSpeciesName.speciesName);
+  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./i)).toBeInTheDocument();
+  // });
 
 });
 

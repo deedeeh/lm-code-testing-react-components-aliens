@@ -39,4 +39,27 @@ describe('<PlanetName />', () => {
     expect(onChangeProp).toHaveBeenCalled();
     expect(onChangeProp).toHaveBeenCalledTimes(4);
   });
+
+  // test('returns a valid planet name', () => {
+  //   const validplanetName = {
+  //     planetName: 'Earth2022',
+  //     onChangePlanetName: mockChange
+  //   }
+  //   render(<PlanetName {...validplanetName} />)
+  //   const planetNameError = screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./);
+  //   expect(planetNameError).not.toBeInTheDocument();
+  // })
+
+  // test('returns an invalid planet name of characters less than 2', async () => {
+  //   const invalidplanetName = {
+  //     planetName: 'K',
+  //     onChangePlanetName: mockChange
+  //   }
+  //   const user = userEvent.setup();
+  //   render(<PlanetName {...invalidplanetName} />);
+  //   const planetNameElement = screen.getByText(/^Planet Name:$/i);
+  //   await user.type(planetNameElement, invalidplanetName.planetName);
+  //   expect(planetNameElement).toBeInTheDocument();
+  //   expect(screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: 'error-message'})).toBeInTheDocument();
+  // });
 });
