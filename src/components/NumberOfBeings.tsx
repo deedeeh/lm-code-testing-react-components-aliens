@@ -1,23 +1,28 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useCallback, useEffect } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 interface NumberOfBeingsProps {
-  numberOfBeings: number | string;
+  numberOfBeings: string;
+  isTouched: boolean;
   onChangeNumberOfBeings: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, onChangeNumberOfBeings }) => {
+const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, 	isTouched, onChangeNumberOfBeings }) => {
   const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
+  const [ touched, setTouched ] = useState<boolean>(isTouched);
 
-  const validate: (input: string) => string | undefined = input => {
+  const validate: (input: string) => string = useCallback((input) => {
+    if(!touched) return '';
     if(!/^[0-9]+$/.test(input)) {
       return 'ERROR - Numbers ONLY!'
     } else if(parseInt(input) < 1000000000) {
       return 'ERROR - Number of beings must be at least 1,000,000,000'
     } else {
-      return undefined;
+      return '';
     }
-  }
+  }, [touched]);
+
+  useEffect(() => setErrorMessage(validate(numberOfBeings)), [validate, numberOfBeings])
 
   return(
     <div>
@@ -29,6 +34,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, onChang
           id='numberOfBeings' 
           value={numberOfBeings} 
           onChange={(e) => {
+            setTouched(true)
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
             onChangeNumberOfBeings(e);

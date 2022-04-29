@@ -2,7 +2,7 @@ import './App.css';
 import W12MForm from './components/W12MForm';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import SubmittedData from './components/SubmittedData';
-import { SpeciesNameContext, PlanetNameContext, NumberOfBeingsContext, WhatIs2Plus2Context, ReasonForSparingContext, FormSubmissionContext, SubmittedDataContext} from './components/ReactContextHook'
+import { SpeciesNameContext, PlanetNameContext, NumberOfBeingsContext, WhatIs2Plus2Context, ReasonForSparingContext, FormSubmissionContext, SubmittedDataContext } from './components/ReactContextHook'
 
 function App() {
 	const [ speciesName, setSpeciesName ] = useState<string>('');
@@ -42,15 +42,15 @@ function App() {
 						<ReasonForSparingContext.Provider value={reasonForSparing}>
 							<FormSubmissionContext.Provider value={formSubmission}>
 								<SubmittedDataContext.Provider value={submittedData}>
-									<h1>W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION</h1>
-									<W12MForm 
-										handleSubmit={handleSubmit} 
-										onChangeSpeciesName={onChangeSpeciesName}
-										onChangePlanetName={onChangePlanetName}
-										onChangeNumberOfBeings={onChangeNumberOfBeings}
-										onChangeWhatIs2Plus2={onChangeWhatIs2Plus2}	
-										onChangeReasonForSparing={onChangeReasonForSparing}
-									/>
+										<h1>W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION</h1>
+										<W12MForm 
+											handleSubmit={handleSubmit} 
+											onChangeSpeciesName={onChangeSpeciesName}
+											onChangePlanetName={onChangePlanetName}
+											onChangeNumberOfBeings={onChangeNumberOfBeings}
+											onChangeWhatIs2Plus2={onChangeWhatIs2Plus2}	
+											onChangeReasonForSparing={onChangeReasonForSparing}
+										/>
 								</SubmittedDataContext.Provider>
 							</FormSubmissionContext.Provider>
 						</ReasonForSparingContext.Provider>

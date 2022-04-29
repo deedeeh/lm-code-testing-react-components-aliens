@@ -7,7 +7,7 @@ interface WhatIs2Plus2Props {
 }
 
 const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, onChangeWhatIs2Plus2 }) => {
-  const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
+  const [ errorMessage, setErrorMessage ] = useState<string | undefined>(undefined);
 
   const validate: (input: string) => string | undefined = input => {
     if(input === 'Select') {

@@ -9,6 +9,7 @@ describe('<SpeciesName />', () => {
   test('renders speciesName component', () => {
     const speciesNameData = {
       speciesName: 'Humans',
+      isTouched: true,
       onChangeSpeciesName: mockChange,
     }
     render(<SpeciesName {...speciesNameData} />);
@@ -19,6 +20,7 @@ describe('<SpeciesName />', () => {
   test('displays speciesName passed prop value', () => {  
     const speciesNameData = {
       speciesName: 'Humans',
+      isTouched: true,
       onChangeSpeciesName: mockChange,
     }
     render(<SpeciesName {...speciesNameData} />);
@@ -30,6 +32,7 @@ describe('<SpeciesName />', () => {
   test('calls onChange function when user types', async () => {
     const speciesNameData = {
       speciesName: '',
+      isTouched: true,
       onChangeSpeciesName: mockChange
     }
     render(<SpeciesName {...speciesNameData} />);
@@ -45,6 +48,7 @@ describe('<SpeciesName />', () => {
   test('calls onChange function with passed onChangeSpeciesName prop', () => {
     const speciesNameData = {
       speciesName: '',
+      isTouched: true,
       onChangeSpeciesName: mockChange
     }
     const { getByLabelText } = render(<SpeciesName {...speciesNameData} />);
@@ -54,27 +58,49 @@ describe('<SpeciesName />', () => {
     expect(speciesNameData.onChangeSpeciesName).toHaveBeenCalledTimes(1);
   });
 
-  // test('returns a valid input', async () => {
-  //   const validSpeciesName = {
-  //     speciesName: '',
-  //     onChangeSpeciesName: mockChange
-  //   }
-  //   render(<SpeciesName {...validSpeciesName} />);
-  //   const speciesNameElement = screen.getByLabelText(/^Species Name:$/i);
-  //   await userEvent.type(speciesNameElement, 'Humans');
-  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./, {selector: '.error-message'})).not.toBeInTheDocument();
-  // });
+  test('returns a valid input of just letters', async () => {
+    const validSpeciesName = {
+      speciesName: 'Humans',
+      isTouched: true,
+      onChangeSpeciesName: mockChange
+    }
+    render(<SpeciesName {...validSpeciesName} />);
+    const speciesNameElement = screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./, {selector: '.error-message'});
+    expect(speciesNameElement).not.toBeInTheDocument();
+  });
 
-  // test('returns an invalid input of characters less than 3', async () => {
-  //   const invalidSpeciesName = {
-  //     speciesName: 'ir',
-  //     onChangeSpeciesName: mockChange
-  //   }
-  //   render(<SpeciesName {...invalidSpeciesName} />);
-  //   const speciesNameElement = screen.getByLabelText(/^Species Name:$/i);
-  //   await userEvent.type(speciesNameElement, invalidSpeciesName.speciesName);
-  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./i)).toBeInTheDocument();
-  // });
+  test('returns an invalid input of characters less than 3', () => {
+    const invalidSpeciesName = {
+      speciesName: 'Hu',
+      isTouched: true,
+      onChangeSpeciesName: mockChange
+    }
+    render(<SpeciesName {...invalidSpeciesName} />);
+    const speciesNameElement = screen.getByText(/ERROR - Species Name must be between 3 and 23 characters./i, {selector: '.error-message'})
+    expect(speciesNameElement).toBeInTheDocument();
+  });
+
+  test('returns an invalid input of characters more than 23', () => {
+    const invalidSpeciesName = {
+      speciesName: 'iroejgioejgioregioergioerjgioregioregoejrgiorejgiorejgioegjierogejogio',
+      isTouched: true,
+      onChangeSpeciesName: mockChange
+    }
+    render(<SpeciesName {...invalidSpeciesName} />);
+    const speciesNameElement = screen.getByText(/ERROR - Species Name must be between 3 and 23 characters./i, {selector: '.error-message'})
+    expect(speciesNameElement).toBeInTheDocument();
+  });
+
+  test('returns an invalid input of numbers or special characters', () => {
+    const invalidSpeciesName = {
+      speciesName: 'Humans2022',
+      isTouched: true,
+      onChangeSpeciesName: mockChange
+    }
+    render(<SpeciesName {...invalidSpeciesName} />);
+    const speciesNameElement = screen.getByText(/ERROR - No numbers or special characters allowed!/i, {selector: '.error-message'})
+    expect(speciesNameElement).toBeInTheDocument();
+  });
 
 });
 

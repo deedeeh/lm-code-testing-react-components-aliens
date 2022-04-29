@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import PlanetName from './PlanetName';
 import userEvent from '@testing-library/user-event';
 
@@ -9,6 +9,7 @@ describe('<PlanetName />', () => {
   test('renders PlanetName component', () => {
     const planetNameData = {
       planetName: 'Earth',
+      isTouched: true,
       onChangePlanetName: mockChange
     }
     const { getByLabelText } = render(<PlanetName {...planetNameData} />);
@@ -19,6 +20,7 @@ describe('<PlanetName />', () => {
   test('displays the correct passed prop value', () => {
     const planetNameData = {
       planetName: 'Earth',
+      isTouched: true,
       onChangePlanetName: mockChange
     }
     render(<PlanetName {...planetNameData} />);
@@ -29,6 +31,7 @@ describe('<PlanetName />', () => {
   test('calls onChange function with passed onChangePlanetName prop', async () => {
     const planetNameData = {
       planetName: '',
+      isTouched: true,
       onChangePlanetName: mockChange
     }
     render(<PlanetName {...planetNameData} />);
@@ -40,25 +43,58 @@ describe('<PlanetName />', () => {
     expect(onChangeProp).toHaveBeenCalledTimes(4);
   });
 
-  // test('returns a valid planet name', () => {
-  //   const validplanetName = {
-  //     planetName: 'Earth2022',
-  //     onChangePlanetName: mockChange
-  //   }
-  //   render(<PlanetName {...validplanetName} />)
-  //   const planetNameError = screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./);
-  //   expect(planetNameError).not.toBeInTheDocument();
-  // })
+  test('returns a valid number of characters for planet name', () => {
+    const validplanetName = {
+      planetName: 'Earth',
+      isTouched: true,
+      onChangePlanetName: mockChange,
+    }
+    render(<PlanetName {...validplanetName} />)
+    const planetNameError = screen.queryByText(/ERROR - Planet Name must be between 2 and 49 characters./);
+    expect(planetNameError).not.toBeInTheDocument();
+  });
 
-  // test('returns an invalid planet name of characters less than 2', async () => {
-  //   const invalidplanetName = {
-  //     planetName: '',
-  //     onChangePlanetName: mockChange
-  //   }
-  //   const user = userEvent.setup();
-  //   render(<PlanetName {...invalidplanetName} />);
-  //   const planetNameElement = screen.getByText(/^Planet Name:$/i);
-  //   await user.type(planetNameElement, 'd');
-  //   expect(screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: 'error-message'})).toBeInTheDocument();
-  // });
+  test('returns an invalid planet name of characters less than 2', async () => {
+    const invalidplanetName = {
+      planetName: 'E',
+      isTouched: true,
+      onChangePlanetName: mockChange
+    }
+    render(<PlanetName {...invalidplanetName} />);
+    const planetNameError = screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: '.error-message'});
+    expect(planetNameError).toBeInTheDocument();
+  });
+
+  test('returns an invalid planet name of characters more than 49', async () => {
+    const invalidplanetName = {
+      planetName: 'iroejgioejgioregioergioerjgioregioregoejrgiorejgiorejgioegjierogejogio',
+      isTouched: true,
+      onChangePlanetName: mockChange
+    }
+    render(<PlanetName {...invalidplanetName} />);
+    const planetNameError = screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: '.error-message'});
+    expect(planetNameError).toBeInTheDocument();
+  });
+
+    test('returns a valid planet name with no special characters', () => {
+    const validplanetName = {
+      planetName: 'Earth2022',
+      isTouched: true,
+      onChangePlanetName: mockChange,
+    }
+    render(<PlanetName {...validplanetName} />)
+    const planetNameError = screen.queryByText(/ERROR - no special characters are allowed!/);
+    expect(planetNameError).not.toBeInTheDocument();
+  });
+
+  test('returns an invalid planet name with special characters', () => {
+    const validplanetName = {
+      planetName: 'Earth()',
+      isTouched: true,
+      onChangePlanetName: mockChange,
+    }
+    render(<PlanetName {...validplanetName} />)
+    const planetNameError = screen.getByText(/ERROR - no special characters are allowed!/i, {selector: '.error-message'});
+    expect(planetNameError).toBeInTheDocument();
+  });
 });

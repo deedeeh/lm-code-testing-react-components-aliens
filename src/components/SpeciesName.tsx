@@ -1,24 +1,29 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useCallback, useEffect } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 interface SpeciesNameProps {
   speciesName: string;
+  isTouched: boolean;
   onChangeSpeciesName: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpeciesName }) => {
+const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, isTouched, onChangeSpeciesName }) => {
   const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
+  const [ touched, setTouched ] = useState<boolean>(isTouched);
 
-  const validate: (input: string) => string | undefined = input => {
+  const validate: (input: string) => string = useCallback((input) => {
+    if(!touched) return '';
     if(input.length < 3 || input.length > 23) {
       return 'ERROR - Species Name must be between 3 and 23 characters.'
     } else if(!/^[a-zA-Z]+$/.test(input)) {
       return 'ERROR - No numbers or special characters allowed!'
     } else {
-      return undefined
+      return '';
     }
-  }
- 
+  }, [touched]);
+
+  useEffect(() => setErrorMessage(validate(speciesName)), [validate, speciesName]);
+
   return (
     <div>
       <label htmlFor='speciesName'>
@@ -30,6 +35,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, onChangeSpeciesN
           id='speciesName' 
           value={speciesName} 
           onChange={(e) => {
+            setTouched(true)
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
             onChangeSpeciesName(e)

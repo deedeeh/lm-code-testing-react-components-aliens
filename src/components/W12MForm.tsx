@@ -12,6 +12,8 @@ import { FormSubmissionContext, NumberOfBeingsContext, PlanetNameContext, Reason
 const W12MForm: React.FC<FormProps> = ({ 
 	handleSubmit, onChangeSpeciesName, onChangePlanetName, onChangeNumberOfBeings, onChangeWhatIs2Plus2, onChangeReasonForSparing  
 }) => {
+	const isTouched: boolean = false; 
+
 	const speciesName = useContext(SpeciesNameContext);
 	const planetName = useContext(PlanetNameContext);
 	const numberOfBeings = useContext(NumberOfBeingsContext);
@@ -19,6 +21,7 @@ const W12MForm: React.FC<FormProps> = ({
 	const reasonForSparing = useContext(ReasonForSparingContext);
 	const formSubmission = useContext(FormSubmissionContext);
 	const submittedData = useContext(SubmittedDataContext);
+
 	return (
 		<>
 			<section className='w12MForm'>
@@ -26,14 +29,17 @@ const W12MForm: React.FC<FormProps> = ({
 					<W12MHeader />
 					<SpeciesName 
 						speciesName={speciesName}
+						isTouched={isTouched}
 						onChangeSpeciesName={onChangeSpeciesName}
 					/>
 					<PlanetName 
 						planetName={planetName}
+						isTouched={isTouched}
 						onChangePlanetName={onChangePlanetName}
 					/>
 					<NumberOfBeings 
 						numberOfBeings={numberOfBeings}
+						isTouched={isTouched}
 						onChangeNumberOfBeings={onChangeNumberOfBeings}
 					/>
 					<WhatIs2Plus2 
