@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import PlanetName from './PlanetName';
 import userEvent from '@testing-library/user-event';
 
@@ -52,14 +52,13 @@ describe('<PlanetName />', () => {
 
   // test('returns an invalid planet name of characters less than 2', async () => {
   //   const invalidplanetName = {
-  //     planetName: 'K',
+  //     planetName: '',
   //     onChangePlanetName: mockChange
   //   }
   //   const user = userEvent.setup();
   //   render(<PlanetName {...invalidplanetName} />);
   //   const planetNameElement = screen.getByText(/^Planet Name:$/i);
-  //   await user.type(planetNameElement, invalidplanetName.planetName);
-  //   expect(planetNameElement).toBeInTheDocument();
+  //   await user.type(planetNameElement, 'd');
   //   expect(screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: 'error-message'})).toBeInTheDocument();
   // });
 });

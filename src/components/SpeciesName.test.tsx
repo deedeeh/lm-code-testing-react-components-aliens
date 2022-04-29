@@ -56,13 +56,13 @@ describe('<SpeciesName />', () => {
 
   // test('returns a valid input', async () => {
   //   const validSpeciesName = {
-  //     speciesName: 'Humans',
+  //     speciesName: '',
   //     onChangeSpeciesName: mockChange
   //   }
   //   render(<SpeciesName {...validSpeciesName} />);
   //   const speciesNameElement = screen.getByLabelText(/^Species Name:$/i);
-  //   await userEvent.type(speciesNameElement, validSpeciesName.speciesName);
-  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./)).not.toBeInTheDocument();
+  //   await userEvent.type(speciesNameElement, 'Humans');
+  //   expect(screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./, {selector: '.error-message'})).not.toBeInTheDocument();
   // });
 
   // test('returns an invalid input of characters less than 3', async () => {
