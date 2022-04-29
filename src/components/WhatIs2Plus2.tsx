@@ -29,7 +29,6 @@ const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, onChangeWhatI
           id='whatIs2Plus2' 
           value={whatIs2Plus2} 
           onChange={(e) => {
-            console.log(e.target.value)
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
             onChangeWhatIs2Plus2(e)
