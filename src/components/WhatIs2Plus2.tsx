@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useState, useCallback, useEffect } from 'react'
 import ErrorMessage from './ErrorMessage';
 
 interface WhatIs2Plus2Props {
@@ -7,15 +7,15 @@ interface WhatIs2Plus2Props {
 }
 
 const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, onChangeWhatIs2Plus2 }) => {
-  const [ errorMessage, setErrorMessage ] = useState<string | undefined>(undefined);
+  const [ errorMessage, setErrorMessage ] = useState<string>('');
 
-  const validate: (input: string) => string | undefined = input => {
+  const validate: (input: string) => string = input => {
     if(input === 'Select') {
       return 'Please select an answer.';
     } else if(input === 'Not 4') {
       return 'ERROR - Sorry that is the wrong answer!'
     } else {
-      return undefined;
+      return '';
     }
   }
 

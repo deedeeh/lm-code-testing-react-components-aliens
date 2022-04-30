@@ -8,7 +8,7 @@ interface SpeciesNameProps {
 }
 
 const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, isTouched, onChangeSpeciesName }) => {
-  const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
+  const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
   const validate: (input: string) => string = useCallback((input) => {

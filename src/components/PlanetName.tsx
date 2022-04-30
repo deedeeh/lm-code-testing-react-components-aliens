@@ -8,7 +8,7 @@ interface PlanetNameProps {
 }
 
 const PlanetName: React.FC<PlanetNameProps> = ({ planetName, isTouched, onChangePlanetName }) => {
-  const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
+  const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
   const validate: (input: string) => string = useCallback((input) => {
@@ -27,7 +27,7 @@ const PlanetName: React.FC<PlanetNameProps> = ({ planetName, isTouched, onChange
     [validate, planetName]
     );
 
-  return(
+  return (
     <div>
       <label htmlFor='planetName'>
         Planet Name:

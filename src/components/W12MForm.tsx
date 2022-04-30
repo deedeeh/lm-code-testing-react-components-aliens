@@ -48,6 +48,7 @@ const W12MForm: React.FC<FormProps> = ({
 					/>
 					<ReasonForSparing 
 						reasonForSparing={reasonForSparing}
+						isTouched={isTouched}
 						onChangeReasonForSparing={onChangeReasonForSparing}
 					/>
 					<button type='submit'>Submit</button>

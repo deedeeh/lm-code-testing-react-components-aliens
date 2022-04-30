@@ -1,18 +1,25 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useCallback, useEffect } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 interface ReasonForSparingProps {
   reasonForSparing: string;
+  isTouched: boolean;
   onChangeReasonForSparing: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ reasonForSparing, onChangeReasonForSparing }) => {
-  const [ errorMessage, setErrorMessage ] = useState<string | undefined>(undefined);
+const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ reasonForSparing, isTouched, onChangeReasonForSparing }) => {
+  const [ errorMessage, setErrorMessage ] = useState<string>('');
+  const [ touched, setTouched ] = useState<boolean>(isTouched);
 
-  const validate: (input: string) => string | undefined = input => 
-    input.length < 17 || input.length > 153 ? 'ERROR - Reason for sparing must be between 17 and 153 characters.' : undefined;
+  const validate: (input: string) => string = useCallback((input) => {
+    if(!touched) return '';
+    return input.length < 17 || input.length > 153 
+    ? 'ERROR - Reason for sparing must be between 17 and 153 characters.' 
+    : '' 
+  }, [touched]);
+
+  useEffect(() => setErrorMessage(validate(reasonForSparing)), [validate, reasonForSparing]);
   
-
   return (
     <div>
       <label htmlFor='reasonForSparing'>
@@ -22,6 +29,7 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ reasonForSparing, o
           id='reasonForSparing' 
           value={reasonForSparing} 
           onChange={(e) => {
+            setTouched(true);
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
             onChangeReasonForSparing(e)

@@ -8,7 +8,7 @@ interface NumberOfBeingsProps {
 }
 
 const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, 	isTouched, onChangeNumberOfBeings }) => {
-  const [ errorMessage, setErrorMessage ] = useState<string | undefined>('');
+  const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
   const validate: (input: string) => string = useCallback((input) => {
