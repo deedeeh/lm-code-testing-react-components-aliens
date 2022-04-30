@@ -3,13 +3,16 @@ import ErrorMessage from './ErrorMessage';
 
 interface WhatIs2Plus2Props {
   whatIs2Plus2: string;
+  isTouched: boolean;
   onChangeWhatIs2Plus2: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, onChangeWhatIs2Plus2 }) => {
+const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, isTouched, onChangeWhatIs2Plus2 }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
+  const [ touched, setTouched ] = useState<boolean>(isTouched);
 
-  const validate: (input: string) => string = input => {
+  const validate: (input: string) => string = useCallback((input) => {
+    if(!touched) return '';
     if(input === 'Select') {
       return 'Please select an answer.';
     } else if(input === 'Not 4') {
@@ -17,7 +20,9 @@ const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, onChangeWhatI
     } else {
       return '';
     }
-  }
+  }, [touched]);
+
+  useEffect(() => setErrorMessage(validate(whatIs2Plus2)), [validate, whatIs2Plus2]);
 
   return (
     <div>
@@ -29,6 +34,7 @@ const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, onChangeWhatI
           id='whatIs2Plus2' 
           value={whatIs2Plus2} 
           onChange={(e) => {
+            setTouched(true);
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
             onChangeWhatIs2Plus2(e)

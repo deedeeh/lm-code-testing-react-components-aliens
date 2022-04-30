@@ -44,6 +44,7 @@ const W12MForm: React.FC<FormProps> = ({
 					/>
 					<WhatIs2Plus2 
 						whatIs2Plus2={whatIs2Plus2}
+						isTouched={isTouched}
 						onChangeWhatIs2Plus2={onChangeWhatIs2Plus2}
 					/>
 					<ReasonForSparing 
