@@ -10,7 +10,7 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '1000000000',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     const { getByLabelText } = render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsLabelText = getByLabelText(/^Number of beings:$/i);
@@ -21,7 +21,7 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '1000000000',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsInputValue = screen.getByLabelText(/^Number of beings:$/i);
@@ -32,11 +32,11 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '1000000000',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsInput = screen.getByRole('textbox');
-    const onChangeProp = numberOfBeingsData.onChangeNumberOfBeings;
+    const onChangeProp = numberOfBeingsData.onChangeFormHandler;
     numberOfBeingsInput.onchange = onChangeProp;
     await userEvent.type(numberOfBeingsInput, '1000000000');
     expect(onChangeProp).toHaveBeenCalled();
@@ -47,7 +47,7 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '1000000000',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsError = screen.queryByText(/ERROR - Number of beings must be at least 1,000,000,000/);
@@ -58,7 +58,7 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '1000000000',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsError = screen.queryByText(/ERROR - Numbers ONLY!/);
@@ -69,7 +69,7 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '1 Million',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsError = screen.getByText(/ERROR - Numbers ONLY!/i, {selector: '.error-message'});
@@ -80,7 +80,7 @@ describe('<NumberOfBeings />', () => {
     const numberOfBeingsData = {
       numberOfBeings: '90000',
       isTouched: true,
-      onChangeNumberOfBeings: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<NumberOfBeings {...numberOfBeingsData} />);
     const numberOfBeingsError = screen.getByText(/ERROR - Number of beings must be at least 1,000,000,000/, {selector: '.error-message'});

@@ -10,7 +10,7 @@ describe('<PlanetName />', () => {
     const planetNameData = {
       planetName: 'Earth',
       isTouched: true,
-      onChangePlanetName: mockChange
+      onChangeFormHandler: mockChange
     }
     const { getByLabelText } = render(<PlanetName {...planetNameData} />);
     const planetNameLabelText = getByLabelText(/^Planet Name:$/i);
@@ -21,7 +21,7 @@ describe('<PlanetName />', () => {
     const planetNameData = {
       planetName: 'Earth',
       isTouched: true,
-      onChangePlanetName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<PlanetName {...planetNameData} />);
     const planetNameInputValue = screen.getByLabelText(/^Planet Name:$/i);
@@ -32,11 +32,11 @@ describe('<PlanetName />', () => {
     const planetNameData = {
       planetName: '',
       isTouched: true,
-      onChangePlanetName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<PlanetName {...planetNameData} />);
     const planetNameElement = screen.getByRole('textbox');
-    const onChangeProp = planetNameData.onChangePlanetName;
+    const onChangeProp = planetNameData.onChangeFormHandler;
     planetNameElement.onchange = onChangeProp;
     await userEvent.type(planetNameElement, 'Mars');
     expect(onChangeProp).toHaveBeenCalled();
@@ -47,7 +47,7 @@ describe('<PlanetName />', () => {
     const validplanetName = {
       planetName: 'Earth',
       isTouched: true,
-      onChangePlanetName: mockChange,
+      onChangeFormHandler: mockChange,
     }
     render(<PlanetName {...validplanetName} />)
     const planetNameError = screen.queryByText(/ERROR - Planet Name must be between 2 and 49 characters./);
@@ -58,7 +58,7 @@ describe('<PlanetName />', () => {
     const invalidplanetName = {
       planetName: 'E',
       isTouched: true,
-      onChangePlanetName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<PlanetName {...invalidplanetName} />);
     const planetNameError = screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: '.error-message'});
@@ -69,7 +69,7 @@ describe('<PlanetName />', () => {
     const invalidplanetName = {
       planetName: 'iroejgioejgioregioergioerjgioregioregoejrgiorejgiorejgioegjierogejogio',
       isTouched: true,
-      onChangePlanetName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<PlanetName {...invalidplanetName} />);
     const planetNameError = screen.getByText(/ERROR - Planet Name must be between 2 and 49 characters./i, {selector: '.error-message'});
@@ -80,7 +80,7 @@ describe('<PlanetName />', () => {
     const validplanetName = {
       planetName: 'Earth2022',
       isTouched: true,
-      onChangePlanetName: mockChange,
+      onChangeFormHandler: mockChange,
     }
     render(<PlanetName {...validplanetName} />)
     const planetNameError = screen.queryByText(/ERROR - no special characters are allowed!/);
@@ -91,7 +91,7 @@ describe('<PlanetName />', () => {
     const validplanetName = {
       planetName: 'Earth()',
       isTouched: true,
-      onChangePlanetName: mockChange,
+      onChangeFormHandler: mockChange,
     }
     render(<PlanetName {...validplanetName} />)
     const planetNameError = screen.getByText(/ERROR - no special characters are allowed!/i, {selector: '.error-message'});

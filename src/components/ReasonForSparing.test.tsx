@@ -9,7 +9,7 @@ describe('<ReasonForSparing />', () => {
     const reasonForSparingProps = {
       reasonForSparing: '',
       isTouched: true,
-      onChangeReasonForSparing: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<ReasonForSparing {...reasonForSparingProps} />);
     const reasonForSparingLabel = screen.getByLabelText(/^Reason for sparing:$/i);
@@ -20,7 +20,7 @@ describe('<ReasonForSparing />', () => {
     const reasonForSparingProps = {
       reasonForSparing: 'There is still good in this world!',
       isTouched: true,
-      onChangeReasonForSparing: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<ReasonForSparing {...reasonForSparingProps} />);
     const input = screen.getByRole('textbox');
@@ -45,11 +45,11 @@ describe('<ReasonForSparing />', () => {
     const reasonForSparingProps = {
       reasonForSparing: '',
       isTouched: true,
-      onChangeReasonForSparing: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<ReasonForSparing {...reasonForSparingProps} />);
     const input = screen.getByRole('textbox');
-    const onChangeProp = reasonForSparingProps.onChangeReasonForSparing;
+    const onChangeProp = reasonForSparingProps.onChangeFormHandler;
     input.onchange = onChangeProp;
     await userEvent.type(input, 'There is still good in this world!');
     expect(onChangeProp).toHaveBeenCalled();
@@ -61,7 +61,7 @@ describe('<ReasonForSparing />', () => {
     const reasonForSparingProps = {
       reasonForSparing: 'There is still good in this world even in 2022.',
       isTouched: true,
-      onChangeReasonForSparing: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<ReasonForSparing {...reasonForSparingProps} />);
     const reasonForSparingError = screen.queryByText(/ERROR - Reason for sparing must be between 17 and 153 characters./);
@@ -72,7 +72,7 @@ describe('<ReasonForSparing />', () => {
     const reasonForSparingProps = {
       reasonForSparing: 'None',
       isTouched: true,
-      onChangeReasonForSparing: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<ReasonForSparing {...reasonForSparingProps} />);
     const reasonForSparingError = screen.queryByText(/ERROR - Reason for sparing must be between 17 and 153 characters./);

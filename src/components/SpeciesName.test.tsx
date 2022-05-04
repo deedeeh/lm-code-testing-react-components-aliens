@@ -10,7 +10,7 @@ describe('<SpeciesName />', () => {
     const speciesNameData = {
       speciesName: 'Humans',
       isTouched: true,
-      onChangeSpeciesName: mockChange,
+      onChangeFormHandler: mockChange,
     }
     render(<SpeciesName {...speciesNameData} />);
     const speciesNameLabelText = screen.getByLabelText(/^Species Name:$/i);
@@ -21,7 +21,7 @@ describe('<SpeciesName />', () => {
     const speciesNameData = {
       speciesName: 'Humans',
       isTouched: true,
-      onChangeSpeciesName: mockChange,
+      onChangeFormHandler: mockChange,
     }
     render(<SpeciesName {...speciesNameData} />);
     const speciesNameElement = screen.getByRole('textbox');
@@ -33,11 +33,11 @@ describe('<SpeciesName />', () => {
     const speciesNameData = {
       speciesName: '',
       isTouched: true,
-      onChangeSpeciesName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<SpeciesName {...speciesNameData} />);
     const speciesNameInput = screen.getByRole('textbox');
-    const onChangeProp = speciesNameData.onChangeSpeciesName;
+    const onChangeProp = speciesNameData.onChangeFormHandler;
     speciesNameInput.onchange = onChangeProp;
     await userEvent.type(speciesNameInput, 'Humans');
     expect(onChangeProp).toHaveBeenCalled();
@@ -49,20 +49,20 @@ describe('<SpeciesName />', () => {
     const speciesNameData = {
       speciesName: '',
       isTouched: true,
-      onChangeSpeciesName: mockChange
+      onChangeFormHandler: mockChange
     }
     const { getByLabelText } = render(<SpeciesName {...speciesNameData} />);
     const input = getByLabelText(/^Species Name:$/i);
     fireEvent.change(input, {target: {value: 'Humans'}});
-    expect(speciesNameData.onChangeSpeciesName).toHaveBeenCalled();
-    expect(speciesNameData.onChangeSpeciesName).toHaveBeenCalledTimes(1);
+    expect(speciesNameData.onChangeFormHandler).toHaveBeenCalled();
+    expect(speciesNameData.onChangeFormHandler).toHaveBeenCalledTimes(1);
   });
 
   test('returns a valid input of just letters', async () => {
     const validSpeciesName = {
       speciesName: 'Humans',
       isTouched: true,
-      onChangeSpeciesName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<SpeciesName {...validSpeciesName} />);
     const speciesNameElement = screen.queryByText(/ERROR - Species Name must be between 3 and 23 characters./, {selector: '.error-message'});
@@ -73,7 +73,7 @@ describe('<SpeciesName />', () => {
     const invalidSpeciesName = {
       speciesName: 'Hu',
       isTouched: true,
-      onChangeSpeciesName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<SpeciesName {...invalidSpeciesName} />);
     const speciesNameElement = screen.getByText(/ERROR - Species Name must be between 3 and 23 characters./i, {selector: '.error-message'})
@@ -84,7 +84,7 @@ describe('<SpeciesName />', () => {
     const invalidSpeciesName = {
       speciesName: 'iroejgioejgioregioergioerjgioregioregoejrgiorejgiorejgioegjierogejogio',
       isTouched: true,
-      onChangeSpeciesName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<SpeciesName {...invalidSpeciesName} />);
     const speciesNameElement = screen.getByText(/ERROR - Species Name must be between 3 and 23 characters./i, {selector: '.error-message'})
@@ -95,7 +95,7 @@ describe('<SpeciesName />', () => {
     const invalidSpeciesName = {
       speciesName: 'Humans2022',
       isTouched: true,
-      onChangeSpeciesName: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<SpeciesName {...invalidSpeciesName} />);
     const speciesNameElement = screen.getByText(/ERROR - No numbers or special characters allowed!/i, {selector: '.error-message'})

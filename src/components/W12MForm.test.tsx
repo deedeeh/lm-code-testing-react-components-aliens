@@ -5,11 +5,7 @@ const mockSubmit = jest.fn();
 
 const formProps = {
 	handleSubmit: mockSubmit,
-	onChangeSpeciesName: () => {},
-	onChangePlanetName: () => {},
-	onChangeNumberOfBeings: () => {},
-	onChangeWhatIs2Plus2: () => {},
-	onChangeReasonForSparing: () => {}
+	onChangeFormHandler: () => {}
 }
 
 test('renders form element', () => {

@@ -8,7 +8,7 @@ describe('<WhatIs2Plus2 />', () => {
     const whatIs2Plus2Props = {
       whatIs2Plus2: 'Not 4',
       isTouched: true,
-      onChangeWhatIs2Plus2: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<WhatIs2Plus2 {...whatIs2Plus2Props} />);
     const whatIs2Plus2Select = screen.getByLabelText(/^What is 2 \+ 2\?$/i);
@@ -19,7 +19,7 @@ describe('<WhatIs2Plus2 />', () => {
     const whatIs2Plus2Props = {
       whatIs2Plus2: 'Not 4',
       isTouched: true,
-      onChangeWhatIs2Plus2: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<WhatIs2Plus2 {...whatIs2Plus2Props} />);
     const whatIs2Plus2Select = screen.getByLabelText(/^What is 2 \+ 2\?$/i);
@@ -30,9 +30,9 @@ describe('<WhatIs2Plus2 />', () => {
     const whatIs2Plus2Props = {
       whatIs2Plus2: 'Not 4',
       isTouched: true,
-      onChangeWhatIs2Plus2: mockChange
+      onChangeFormHandler: mockChange
     }
-    const onChangeProp = whatIs2Plus2Props.onChangeWhatIs2Plus2;
+    const onChangeProp = whatIs2Plus2Props.onChangeFormHandler;
     render(<WhatIs2Plus2 {...whatIs2Plus2Props} />);
     const whatIs2Plus2Select = screen.getByLabelText(/^What is 2 \+ 2\?$/i);
     fireEvent.change(whatIs2Plus2Select, { target: { value: '4' } });
@@ -44,7 +44,7 @@ describe('<WhatIs2Plus2 />', () => {
     const whatIs2Plus2Props = {
       whatIs2Plus2: '4',
       isTouched: true,
-      onChangeWhatIs2Plus2: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<WhatIs2Plus2 {...whatIs2Plus2Props} />);
     const whatIs2Plus2Error = screen.queryByText(/ERROR - Sorry that is the wrong answer!/);
@@ -55,7 +55,7 @@ describe('<WhatIs2Plus2 />', () => {
     const whatIs2Plus2Props = {
       whatIs2Plus2: 'Not 4',
       isTouched: true,
-      onChangeWhatIs2Plus2: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<WhatIs2Plus2 {...whatIs2Plus2Props} />);
     const whatIs2Plus2Error = screen.queryByText(/ERROR - Sorry that is the wrong answer!/);
@@ -66,7 +66,7 @@ describe('<WhatIs2Plus2 />', () => {
     const whatIs2Plus2Props = {
       whatIs2Plus2: 'Select',
       isTouched: true,
-      onChangeWhatIs2Plus2: mockChange
+      onChangeFormHandler: mockChange
     }
     render(<WhatIs2Plus2 {...whatIs2Plus2Props} />);
     const whatIs2Plus2Error = screen.queryByText(/Please select an answer./);
