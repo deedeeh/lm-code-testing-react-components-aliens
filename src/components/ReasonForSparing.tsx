@@ -4,10 +4,10 @@ import ErrorMessage from './ErrorMessage';
 interface ReasonForSparingProps {
   reasonForSparing: string;
   isTouched: boolean;
-  onChangeReasonForSparing: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeFormHandler: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ reasonForSparing, isTouched, onChangeReasonForSparing }) => {
+const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ reasonForSparing, isTouched, onChangeFormHandler }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -32,7 +32,7 @@ const ReasonForSparing: React.FC<ReasonForSparingProps> = ({ reasonForSparing, i
             setTouched(true);
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
-            onChangeReasonForSparing(e)
+            onChangeFormHandler(e)
           }}>
         </textarea>
       </label>

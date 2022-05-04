@@ -7,18 +7,19 @@ import WhatIs2Plus2 from './WhatIs2Plus2';
 import ReasonForSparing from './ReasonForSparing';
 import DisplayFormData from './DisplayFormData';
 import FormProps from './FormProps';
-import { FormSubmissionContext, NumberOfBeingsContext, PlanetNameContext, ReasonForSparingContext, SpeciesNameContext, SubmittedDataContext, WhatIs2Plus2Context } from './ReactContextHook';
+import { FormDataContext, FormSubmissionContext, SubmittedDataContext } from './ReactContextHook';
 
 const W12MForm: React.FC<FormProps> = ({ 
-	handleSubmit, onChangeSpeciesName, onChangePlanetName, onChangeNumberOfBeings, onChangeWhatIs2Plus2, onChangeReasonForSparing  
+	handleSubmit, onChangeFormHandler
 }) => {
 	const isTouched: boolean = false; 
 
-	const speciesName = useContext(SpeciesNameContext);
-	const planetName = useContext(PlanetNameContext);
-	const numberOfBeings = useContext(NumberOfBeingsContext);
-	const whatIs2Plus2 = useContext(WhatIs2Plus2Context);
-	const reasonForSparing = useContext(ReasonForSparingContext);
+	// const speciesName = useContext(SpeciesNameContext);
+	// const planetName = useContext(PlanetNameContext);
+	// const numberOfBeings = useContext(NumberOfBeingsContext);
+	// const whatIs2Plus2 = useContext(WhatIs2Plus2Context);
+	// const reasonForSparing = useContext(ReasonForSparingContext);
+	const formData = useContext(FormDataContext);
 	const formSubmission = useContext(FormSubmissionContext);
 	const submittedData = useContext(SubmittedDataContext);
 
@@ -28,29 +29,29 @@ const W12MForm: React.FC<FormProps> = ({
 				<form onSubmit={handleSubmit} data-testid='form'>
 					<W12MHeader />
 					<SpeciesName 
-						speciesName={speciesName}
+						speciesName={formData.speciesName}
 						isTouched={isTouched}
-						onChangeSpeciesName={onChangeSpeciesName}
+						onChangeFormHandler={onChangeFormHandler}
 					/>
 					<PlanetName 
-						planetName={planetName}
+						planetName={formData.planetName}
 						isTouched={isTouched}
-						onChangePlanetName={onChangePlanetName}
+						onChangeFormHandler={onChangeFormHandler}
 					/>
 					<NumberOfBeings 
-						numberOfBeings={numberOfBeings}
+						numberOfBeings={formData.numberOfBeings}
 						isTouched={isTouched}
-						onChangeNumberOfBeings={onChangeNumberOfBeings}
+						onChangeFormHandler={onChangeFormHandler}
 					/>
 					<WhatIs2Plus2 
-						whatIs2Plus2={whatIs2Plus2}
+						whatIs2Plus2={formData.whatIs2Plus2}
 						isTouched={isTouched}
-						onChangeWhatIs2Plus2={onChangeWhatIs2Plus2}
+						onChangeFormHandler={onChangeFormHandler}
 					/>
 					<ReasonForSparing 
-						reasonForSparing={reasonForSparing}
+						reasonForSparing={formData.reasonForSparing}
 						isTouched={isTouched}
-						onChangeReasonForSparing={onChangeReasonForSparing}
+						onChangeFormHandler={onChangeFormHandler}
 					/>
 					<button type='submit'>Submit</button>
 				</form>

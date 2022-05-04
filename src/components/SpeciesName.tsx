@@ -4,10 +4,10 @@ import ErrorMessage from './ErrorMessage';
 interface SpeciesNameProps {
   speciesName: string;
   isTouched: boolean;
-  onChangeSpeciesName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFormHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, isTouched, onChangeSpeciesName }) => {
+const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, isTouched, onChangeFormHandler }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -38,7 +38,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({ speciesName, isTouched, onCha
             setTouched(true)
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
-            onChangeSpeciesName(e)
+            onChangeFormHandler(e)
           }} />
       </label>
       <ErrorMessage message={errorMessage} />

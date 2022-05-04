@@ -4,10 +4,10 @@ import ErrorMessage from './ErrorMessage';
 interface NumberOfBeingsProps {
   numberOfBeings: string;
   isTouched: boolean;
-  onChangeNumberOfBeings: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFormHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, 	isTouched, onChangeNumberOfBeings }) => {
+const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, 	isTouched, onChangeFormHandler }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -37,7 +37,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({ numberOfBeings, 	isTouc
             setTouched(true)
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
-            onChangeNumberOfBeings(e);
+            onChangeFormHandler(e);
           }} 
         />
       </label>

@@ -4,10 +4,10 @@ import ErrorMessage from './ErrorMessage';
 interface PlanetNameProps {
   planetName: string;
   isTouched: boolean;
-  onChangePlanetName: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChangeFormHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const PlanetName: React.FC<PlanetNameProps> = ({ planetName, isTouched, onChangePlanetName }) => {
+const PlanetName: React.FC<PlanetNameProps> = ({ planetName, isTouched, onChangeFormHandler }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -41,7 +41,7 @@ const PlanetName: React.FC<PlanetNameProps> = ({ planetName, isTouched, onChange
             setTouched(true);
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
-            onChangePlanetName(e)
+            onChangeFormHandler(e)
           }} />
       </label>
       <ErrorMessage message={errorMessage} />

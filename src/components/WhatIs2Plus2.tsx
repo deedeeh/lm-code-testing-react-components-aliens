@@ -4,10 +4,10 @@ import ErrorMessage from './ErrorMessage';
 interface WhatIs2Plus2Props {
   whatIs2Plus2: string;
   isTouched: boolean;
-  onChangeWhatIs2Plus2: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onChangeFormHandler: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, isTouched, onChangeWhatIs2Plus2 }) => {
+const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, isTouched, onChangeFormHandler }) => {
   const [ errorMessage, setErrorMessage ] = useState<string>('');
   const [ touched, setTouched ] = useState<boolean>(isTouched);
 
@@ -37,7 +37,7 @@ const WhatIs2Plus2: React.FC<WhatIs2Plus2Props> = ({ whatIs2Plus2, isTouched, on
             setTouched(true);
             const errorMessage = validate(e.target.value);
             setErrorMessage(errorMessage);
-            onChangeWhatIs2Plus2(e)
+            onChangeFormHandler(e)
           }}>
           <option value='Select'>Select</option>
           <option value='4'>4</option>

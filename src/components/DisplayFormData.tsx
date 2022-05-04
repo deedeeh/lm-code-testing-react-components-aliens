@@ -1,6 +1,6 @@
-import SubmittedData from './SubmittedData';
+import W12MFormData from './W12MFormData';
 
-const DisplayFormData: React.FC<SubmittedData> = ({ speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing}) => 
+const DisplayFormData: React.FC<W12MFormData> = ({ speciesName, planetName, numberOfBeings, whatIs2Plus2, reasonForSparing}) => 
   <div>
     <h2>Form Data</h2>
     <p>Species Name: {speciesName}</p>
