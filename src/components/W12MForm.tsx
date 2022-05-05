@@ -5,23 +5,15 @@ import PlanetName from './PlanetName';
 import NumberOfBeings from './NumberOfBeings';
 import WhatIs2Plus2 from './WhatIs2Plus2';
 import ReasonForSparing from './ReasonForSparing';
-import DisplayFormData from './DisplayFormData';
 import FormProps from './FormProps';
-import { FormDataContext, FormSubmissionContext, SubmittedDataContext } from './ReactContextHook';
+import { FormDataContext } from '../App';
 
 const W12MForm: React.FC<FormProps> = ({ 
 	handleSubmit, onChangeFormHandler
 }) => {
 	const isTouched: boolean = false; 
 
-	// const speciesName = useContext(SpeciesNameContext);
-	// const planetName = useContext(PlanetNameContext);
-	// const numberOfBeings = useContext(NumberOfBeingsContext);
-	// const whatIs2Plus2 = useContext(WhatIs2Plus2Context);
-	// const reasonForSparing = useContext(ReasonForSparingContext);
 	const formData = useContext(FormDataContext);
-	const formSubmission = useContext(FormSubmissionContext);
-	const submittedData = useContext(SubmittedDataContext);
 
 	return (
 		<>
@@ -55,17 +47,6 @@ const W12MForm: React.FC<FormProps> = ({
 					/>
 					<button type='submit'>Submit</button>
 				</form>
-			</section>
-			<section>
-				{formSubmission && (
-					<DisplayFormData 
-						speciesName={submittedData.speciesName}
-						planetName={submittedData.planetName}
-						numberOfBeings={submittedData.numberOfBeings}
-						whatIs2Plus2={submittedData.whatIs2Plus2}
-						reasonForSparing={submittedData.reasonForSparing}
-					/>
-				)}
 			</section>
 		</>
 	);

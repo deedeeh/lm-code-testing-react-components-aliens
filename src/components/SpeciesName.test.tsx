@@ -4,6 +4,10 @@ import userEvent from '@testing-library/user-event';
 
 const mockChange = jest.fn();
 
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('<SpeciesName />', () => {
   
   test('renders speciesName component', () => {

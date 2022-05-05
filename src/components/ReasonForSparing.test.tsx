@@ -26,20 +26,6 @@ describe('<ReasonForSparing />', () => {
     const input = screen.getByRole('textbox');
     expect(input).toHaveValue('There is still good in this world!');
   });
-
-  // test('changes the value when user types', async () => {
-  //   const reasonForSparingProps = {
-  //     reasonForSparing: 'Hello',
-  //     isTouched: true,
-  //     onChangeReasonForSparing: mockChange
-  //   }
-  //   render(<ReasonForSparing {...reasonForSparingProps} />);
-  //   const input = screen.getByRole('textbox');
-  //   expect(input).toHaveValue('Hello');
-  //   userEvent.clear(input);
-  //   await userEvent.type(input, 'There is still good in this world!');
-  //   expect(input).toHaveValue('There is still good in this world!');
-  // }); 
   
   test('calls onChange function when user types', async () => {
     const reasonForSparingProps = {
@@ -54,7 +40,6 @@ describe('<ReasonForSparing />', () => {
     await userEvent.type(input, 'There is still good in this world!');
     expect(onChangeProp).toHaveBeenCalled();
     expect(onChangeProp).toHaveBeenCalledTimes(34);
-    // expect(input).toHaveValue('There is still good in this world!');
   });
 
   test('returns a valid reason for sparing of characters between 17 and 153', () => {

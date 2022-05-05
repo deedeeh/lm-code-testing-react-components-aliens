@@ -1,8 +1,10 @@
+import React from 'react';
 import './App.css';
 import W12MForm from './components/W12MForm';
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { FormDataContext, FormSubmissionContext, SubmittedDataContext } from './components/ReactContextHook'
 import W12MFormData from './components/W12MFormData';
+import ThankYou from './components/ThankYou';
+import DisplayFormData from './components/DisplayFormData';
 
 const formDataDefaults = {
 	speciesName: '',
@@ -12,13 +14,10 @@ const formDataDefaults = {
 	reasonForSparing: ''
 }
 
+export const FormDataContext = React.createContext<W12MFormData>(formDataDefaults)
+
 function App() {
 	const [ formData, setFormData ] = useState<W12MFormData>(formDataDefaults);
-	// const [ speciesName, setSpeciesName ] = useState<string>('');
-	// const [ planetName, setPlanetName ] = useState<string>('');
-	// const [ numberOfBeings, setNumberOfBeings ] = useState<string>('');
-	// const [ whatIs2Plus2, setWhaIs2Plus2 ] = useState<string>('Select');
-	// const [ reasonForSparing, setReasonForSparing ] = useState<string>('');
 	const [ formSubmission, setFormSubmission ] = useState<boolean>(false);
 	const [ submittedData, setSubmittedData ] = useState<W12MFormData>(formDataDefaults);
 
@@ -39,28 +38,29 @@ function App() {
 		setFormData(newFormData);
 	}
 
-	// const onChangeSpeciesName= (e: ChangeEvent<HTMLInputElement>) => setSpeciesName(e.target.value);
-	// const onChangePlanetName=(e: ChangeEvent<HTMLInputElement>) => setPlanetName(e.target.value);
-	// const onChangeNumberOfBeings= (e: ChangeEvent<HTMLInputElement>) => setNumberOfBeings(e.target.value);
-	// const onChangeWhatIs2Plus2= (e: ChangeEvent<HTMLSelectElement>) => setWhaIs2Plus2(e.target.value);
-	// const onChangeReasonForSparing= (e: ChangeEvent<HTMLTextAreaElement>) => setReasonForSparing(e.target.value);
-
 	return (
 		<FormDataContext.Provider value={formData}>
-			<FormSubmissionContext.Provider value={formSubmission}>
-				<SubmittedDataContext.Provider value={submittedData}>
-						<h1>W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION</h1>
-						<W12MForm 
-							handleSubmit={handleSubmit} 
-							// onChangeSpeciesName={onChangeSpeciesName}
-							// onChangePlanetName={onChangePlanetName}
-							// onChangeNumberOfBeings={onChangeNumberOfBeings}
-							// onChangeWhatIs2Plus2={onChangeWhatIs2Plus2}	
-							// onChangeReasonForSparing={onChangeReasonForSparing}
-							onChangeFormHandler={onChangeFormHandler}
-						/>
-				</SubmittedDataContext.Provider>
-			</FormSubmissionContext.Provider>
+			{!formSubmission && (
+			<>
+				<h1>W-12-M :- APPLICATION TO SPARE PLANET FROM DESTRUCTION</h1>
+				<W12MForm 
+					handleSubmit={handleSubmit} 
+					onChangeFormHandler={onChangeFormHandler}
+				/>
+			</>
+			)}
+			{formSubmission && (
+				<>
+				<ThankYou />
+				<DisplayFormData 
+					speciesName={submittedData.speciesName}
+					planetName={submittedData.planetName}
+					numberOfBeings={submittedData.numberOfBeings}
+					whatIs2Plus2={submittedData.whatIs2Plus2}
+					reasonForSparing={submittedData.reasonForSparing}
+				/>
+				</>
+			)}
 		</FormDataContext.Provider>
 	);
 }

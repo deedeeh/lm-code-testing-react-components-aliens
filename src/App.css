@@ -14,3 +14,9 @@ body {
 .error-message {
 	color: red;
 }
+
+.logo {
+	display: block;
+	margin: 1rem auto;
+	width: 20%;
+}
